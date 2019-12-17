@@ -5,20 +5,3 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background: rgba(238, 226, 255, 1);
 }
-
-
-._lastColumn {
-  background-color: white;
-  border: none;
-  padding: 0rem;
-}
-
-._icon {
-  cursor: pointer;
-  height: 75px;
-  width: 54px;
-}
-
-._icon:hover {
-  fill: rgba(255,0,0,1);
-}
