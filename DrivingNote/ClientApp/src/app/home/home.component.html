@@ -1,6 +1,8 @@
 <div class="container">
-  <h1> Blanket for at oprette kørselsseddel.</h1>
-  <button (click)="table.addCell()">Tilføj Ny Række</button>
-  <button>Send Kørselsseddel</button>
+  <h1 class="text-center">Blanket for at oprette kørselsseddel.</h1>
+  <div class="col-md-12 d-flex justify-content-between">
+    <button class="col-md-3 _cylinderbutton _cylinderbutton-left" (click)="table.addCell()">Tilføj Ny Række</button>
+    <button class="col-md-3 _cylinderbutton _cylinderbutton-right">Send Kørselsseddel</button>
+  </div>
   <app-tabel #table></app-tabel>
 </div>

@@ -1,1 +1,27 @@
-﻿
+._cylinderbutton {
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+
+  &-left {
+    background: rgba(64, 255, 6, 0.2);
+  }
+
+  &-right {
+    background: rgba(14, 6, 255, 0.2);
+  }
+
+  &-left:hover {
+    background-color: rgba(64, 255, 6, 0.5);
+  }
+
+  &-right:hover {
+    background-color: rgba(14, 6, 255, 0.5);
+  }
+}

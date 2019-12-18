@@ -2,27 +2,29 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Dato</th>
-        <th scope="col">Start Adresse</th>
-        <th scope="col">Slut Adresse</th>
-        <th scope="col">Tur/retur</th>
-        <th scope="col">Distance</th>
+        <th scope="col" class="text-center">Dato</th>
+        <th scope="col" class="text-center">Start Adresse</th>
+        <th scope="col" class="text-center">Slut Adresse</th>
+        <th scope="col" class="text-center">Tur/retur</th>
+        <th scope="col" class="text-center">Distance</th>
       </tr>
     </thead>
     <tbody>
-      <tr [formGroup]="cellForm">
-        <td><input formControlName="date" type="date" /> </td>
-        <td><input formControlName="startAddress" type="text" /> </td>
-        <td><input formControlName="endAddress" type="text" /> </td>
-        <td><input formControlName="roundTrip" type="checkbox" /> </td>
-        <td><input formControlName="distance" type="text" /> </td>
+      <tr class="_inputRow" [formGroup]="cellForm">
+        <td class="text-lg-center"><input formControlName="date" type="date" /> </td>
+        <td class="text-lg-center"><input formControlName="startAddress" type="text" /> </td>
+        <td class="text-lg-center"><input formControlName="endAddress" class="mx-md-2" type="text" /> </td>
+        <td class="text-lg-center"><input formControlName="roundTrip" class="mx-md-2" type="checkbox" /> </td>
+        <td class="text-lg-center"><input formControlName="distance" class="mx-md-2" type="text" /> </td>
       </tr>
-      <tr *ngFor="let cell of TableArray">
-        <td class="text-justify"> {{cell.Date}} </td>
-        <td> {{cell.StartAddress}} </td>
-        <td> {{cell.EndAddress}} </td>
-        <td> {{cell.RoundTrip}} </td>
-        <td> {{cell.Distance}} </td>
+    </tbody>
+    <tbody class="_infoRow">
+      <tr  *ngFor="let cell of TableArray">
+        <td class="text-center"> 11/11/11 </td>
+        <td class="text-center"> Vawrfmeklfnmerg 22 </td>
+        <td class="text-center"> jwenkjlfwnfwejknf 3 </td>
+        <td class="text-center"> true </td>
+        <td class="text-center"> 222 </td>
         <td class="_lastColumn">
           <a (click)="deleteCell(cell)">
             <app-delete-btn></app-delete-btn>
@@ -32,3 +34,15 @@
     </tbody>
   </table>
 </div>
+
+
+<!--<td class="text-justify"> {{cell.Date}} </td>
+<td> {{cell.StartAddress}} </td>
+<td> {{cell.EndAddress}} </td>
+<td> {{cell.RoundTrip}} </td>
+<td> {{cell.Distance}} </td>
+<td class="_lastColumn">
+  <a (click)="deleteCell(cell)">
+    <app-delete-btn></app-delete-btn>
+  </a>
+</td>-->
