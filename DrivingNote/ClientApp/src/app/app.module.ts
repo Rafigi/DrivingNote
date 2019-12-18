@@ -24,7 +24,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     NgbModule,
     RouterModule.forRoot([
-      { path: '', component: AppComponent, pathMatch: 'full' }
+      { path: '', component: HomeComponent, pathMatch: 'full' }
     ])
   ],
   providers: [],
