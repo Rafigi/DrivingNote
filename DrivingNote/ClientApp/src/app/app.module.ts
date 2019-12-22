@@ -9,13 +9,19 @@ import { AppComponent } from './app.component';
 import { TabelComponent } from './tabel/tabel.component';
 import { DeleteBtnComponent } from './delete-btn/delete-btn.component';
 import { HomeComponent } from './home/home.component';
+import { SetupComponent } from './setup/setup.component';
+import { SwitchComponent } from '../app/CustomComponents/switch/switch.component';
+import { ToggleComponent } from '../app/CustomComponents/toggle/toggle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TabelComponent,
     DeleteBtnComponent,
-    HomeComponent
+    HomeComponent,
+    SetupComponent,
+    SwitchComponent,
+    ToggleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

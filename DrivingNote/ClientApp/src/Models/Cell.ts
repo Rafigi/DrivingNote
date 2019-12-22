@@ -3,10 +3,10 @@ export default class Cell {
   Date: Date;
   StartAddress: string;
   EndAddress: string;
-  RoundTrip: string;
+  RoundTrip: boolean;
   Distance: string;
 
-  constructor(id: number, date: Date, StartAddress: string, EndAddress: string, roundTrip: string, distance: string) {
+  constructor(id: number, date: Date, StartAddress: string, EndAddress: string, roundTrip: boolean, distance: string) {
     this.id = id;
     this.Date = date;
     this.StartAddress = StartAddress;

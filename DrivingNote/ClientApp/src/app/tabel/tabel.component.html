@@ -1,5 +1,17 @@
 <div class="container">
   <table class="table">
+    <tbody>
+      <tr class="_inputRow col-lg-12" [formGroup]="cellForm">
+        <td class="text-lg-center"><input formControlName="date" type="date" /> </td>
+        <td class="text-lg-center"><input formControlName="startAddress" (keydown)="initStartInput($event)" #startAddress placeholder="Start Adresse" type="text" /> </td>
+        <td class="text-lg-center"><input formControlName="endAddress" (keydown)="initEndInput($event)" #endAddress placeholder="Slut Adresse" type="text" /> </td>
+        <td> <app-toggle [on]="_roundTrip" (toggled)="RouteTripSwitch($event)"> </app-toggle> </td>
+        <td class="text-lg-center"><input formControlName="distance" placeholder="Distance for ruten" type="text" /> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table col-lg-12">
     <thead>
       <tr>
         <th scope="col" class="text-center">Dato</th>
@@ -9,24 +21,15 @@
         <th scope="col" class="text-center">Distance</th>
       </tr>
     </thead>
-    <tbody>
-      <tr class="_inputRow" [formGroup]="cellForm">
-        <td class="text-lg-center"><input formControlName="date" type="date" /> </td>
-        <td class="text-lg-center"><input formControlName="startAddress" type="text" /> </td>
-        <td class="text-lg-center"><input formControlName="endAddress" class="mx-md-2" type="text" /> </td>
-        <td class="text-lg-center"><input formControlName="roundTrip" class="mx-md-2" type="checkbox" /> </td>
-        <td class="text-lg-center"><input formControlName="distance" class="mx-md-2" type="text" /> </td>
-      </tr>
-    </tbody>
-    <tbody class="_infoRow">
-      <tr  *ngFor="let cell of TableArray">
-        <td class="text-center"> 11/11/11 </td>
-        <td class="text-center"> Vawrfmeklfnmerg 22 </td>
-        <td class="text-center"> jwenkjlfwnfwejknf 3 </td>
-        <td class="text-center"> true </td>
-        <td class="text-center"> 222 </td>
-        <td class="_lastColumn">
-          <a (click)="deleteCell(cell)">
+    <tbody class="_infoRow col-lg-12">
+      <tr *ngFor="let cell of TableArray">
+        <td class="text-lg-center">  {{cell.Date}} </td>
+        <td class="text-lg-center"> {{cell.StartAddress}} </td>
+        <td class="text-lg-center"> {{cell.EndAddress}}  </td>
+        <td class="text-lg-center"> {{cell.RoundTrip}} </td>
+        <td class="text-lg-center"> {{cell.Distance}} </td>
+        <td class="_btnColumn">
+          <a class="_deleteBtn" (click)="deleteCell(cell)">
             <app-delete-btn></app-delete-btn>
           </a>
         </td>
@@ -34,15 +37,3 @@
     </tbody>
   </table>
 </div>
-
-
-<!--<td class="text-justify"> {{cell.Date}} </td>
-<td> {{cell.StartAddress}} </td>
-<td> {{cell.EndAddress}} </td>
-<td> {{cell.RoundTrip}} </td>
-<td> {{cell.Distance}} </td>
-<td class="_lastColumn">
-  <a (click)="deleteCell(cell)">
-    <app-delete-btn></app-delete-btn>
-  </a>
-</td>-->
