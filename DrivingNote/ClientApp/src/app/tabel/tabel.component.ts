@@ -27,10 +27,12 @@ export class TabelComponent implements OnInit {
 
   cellForm = new FormGroup({
     date: new FormControl(this.createNowDate()),
-    startAddress: new FormControl('', Validators.required),
-    endAddress: new FormControl('', Validators.required),
+    startAddress: new FormControl(null, Validators.required),
+    endAddress: new FormControl(null, Validators.required),
     distance: new FormControl('')
   });
+
+
 
 
   ngOnInit() {
@@ -129,7 +131,7 @@ export class TabelComponent implements OnInit {
     let distanceArray = input.split(" ");
 
     if (this._roundTrip == true) {
-      let newDistance = parseInt(distanceArray[0]) * 2;
+      let newDistance = parseFloat(distanceArray[0]) * 2;
       this.distanceResult = newDistance + " " + distanceArray[1];
     }
     else {
@@ -145,17 +147,22 @@ export class TabelComponent implements OnInit {
 
 
   public addCell(): void {
-    let newCell = new Cell(this.id,
-      this.cellForm.get("date").value,
-      this.startAddressResult,
-      this.endAddressResult,
-      this._roundTrip,
-      this.distanceResult
-    );
 
-    this.id++;
-    this.TableArray.push(newCell);
-    this.clearForms();
+    if (!this.cellForm.invalid) {
+      let newCell = new Cell(this.id,
+        this.cellForm.get("date").value,
+        this.startAddressResult,
+        this.endAddressResult,
+        this._roundTrip,
+        this.distanceResult
+      );
+
+
+      this.id++;
+      this.TableArray.push(newCell);
+      this.clearForms();
+    }
+    console.log("hello")
   }
 
   public deleteCell(cell: Cell): void {
@@ -173,5 +180,9 @@ export class TabelComponent implements OnInit {
     this._roundTrip = false;
     this.cellForm.get("distance").setValue('');
   }
+
+  get getStartAddress() { return this.cellForm.get('startAddress'); }
+  get getEndAddress() { return this.cellForm.get('endAddress'); }
+
 
 }

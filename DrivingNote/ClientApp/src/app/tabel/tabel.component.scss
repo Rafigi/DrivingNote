@@ -18,11 +18,15 @@ thead {
 
     input::placeholder {
       text-align: center;
+      font-size: small;
     }
 
     input:focus {
       border-bottom-width: 2px;
       outline: none;
+      color: rgba(0, 0, 0, 0.2);
+      text-align: center;
+      font-size: large;
     }
   }
 }
