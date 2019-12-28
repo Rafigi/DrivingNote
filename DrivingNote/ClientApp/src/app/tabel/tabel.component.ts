@@ -84,8 +84,6 @@ export class TabelComponent implements OnInit {
     if (event.key == "Enter") {
       this.cellForm.get("startAddress").setValue(input.value);
     }
-
-
   }
 
   initEndInput(event) {
@@ -96,13 +94,14 @@ export class TabelComponent implements OnInit {
     if (event.key == "Enter") {
       this.cellForm.get("endAddress").setValue(input.value);
     }
-
   }
 
   Distance() {
+    if (this.cellForm.invalid)
+      return;
+
     let startInput: string = this.cellForm.get("startAddress").value;
     let endInput: string = this.cellForm.get("endAddress").value;
-
 
     if (startInput.length > 5 && endInput.length > 5) {
       var service = new google.maps.DistanceMatrixService();
