@@ -8,7 +8,7 @@ import { Component, Output, EventEmitter, Input, ElementRef, OnInit, OnDestroy }
 /** Modal component*/
 export class ModalComponent implements OnInit {
 
-  private Show: boolean = true;
+  private show: boolean = false;
   private element: any;
 
   /** Modal ctor */
@@ -30,11 +30,11 @@ export class ModalComponent implements OnInit {
   }
 
   OpenModal() {
-    this.Show = true;
+    this.show = true;
   }
 
   CloseModal() {
-    this.Show = false;
+    this.show = false;
   }
 
 }

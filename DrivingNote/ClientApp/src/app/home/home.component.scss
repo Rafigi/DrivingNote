@@ -33,6 +33,7 @@
 
   input {
     border-style: none;
+    text-align: center;
   }
 
   input::placeholder {
@@ -42,10 +43,11 @@
 
   input:focus {
     outline: none;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 1);
     text-align: center;
     font-size: large;
-    border-bottom: solid;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.5);
   }
 
   select {
