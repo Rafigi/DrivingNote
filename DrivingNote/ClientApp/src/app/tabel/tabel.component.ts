@@ -162,7 +162,6 @@ export class TabelComponent implements OnInit {
       this.TableArray.push(newCell);
       this.clearForms();
     }
-    console.log("hello")
   }
 
   public deleteCell(cell: Cell): void {
@@ -175,8 +174,8 @@ export class TabelComponent implements OnInit {
 
   private clearForms() {
     this.cellForm.get("date").setValue(this.createNowDate());
-    this.cellForm.get("startAddress").setValue('');
-    this.cellForm.get("endAddress").setValue('');
+    this.cellForm.get("startAddress").reset();
+    this.cellForm.get("endAddress").reset();
     this._roundTrip = false;
     this.cellForm.get("distance").setValue('');
   }
