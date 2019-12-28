@@ -1,0 +1,7 @@
+<div class="modalBox" *ngIf="Show" >
+  <span class="helper"></span>
+  <div class="inside-popup">
+    <div class="popupCloseButton" (click)="CloseModal()">X</div>
+    <ng-content></ng-content>
+  </div>
+</div>

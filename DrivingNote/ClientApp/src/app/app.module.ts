@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { SetupComponent } from './setup/setup.component';
 import { SwitchComponent } from '../app/CustomComponents/switch/switch.component';
 import { ToggleComponent } from '../app/CustomComponents/toggle/toggle.component';
+import { ModalComponent } from '../app/CustomComponents/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ToggleComponent } from '../app/CustomComponents/toggle/toggle.component
     HomeComponent,
     SetupComponent,
     SwitchComponent,
-    ToggleComponent
+    ToggleComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
