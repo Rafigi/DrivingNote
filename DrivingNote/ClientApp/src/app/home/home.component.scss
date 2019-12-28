@@ -53,12 +53,8 @@
   select {
     color: rgba(0, 0, 0, 0.8);
     border-style: none;
-  }
-
-  select::placeholder {
-    text-align: center;
-    border-style: none;
-    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    outline: none;
   }
 
   option {
@@ -68,5 +64,6 @@
   option:focus {
     color: rgba(0, 0, 0, 0.8);
     outline: none;
+    cursor: pointer;
   }
 }
