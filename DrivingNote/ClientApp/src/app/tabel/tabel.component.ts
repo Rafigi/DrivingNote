@@ -91,6 +91,7 @@ export class TabelComponent implements OnInit {
     new google.maps.places.Autocomplete(input, this.options);
     this.Distance();
 
+    //Need this because, when user enter then form will be reset to length off 0.
     if (event.key == "Enter") {
       this.cellForm.get("endAddress").setValue(input.value);
     }
