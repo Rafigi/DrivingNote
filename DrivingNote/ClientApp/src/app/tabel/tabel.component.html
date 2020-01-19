@@ -8,7 +8,7 @@
           <div *ngIf="getStartAddress.invalid && (getStartAddress.dirty || getStartAddress.touched)"
                class="alert alert-danger">
             <div *ngIf="getStartAddress.errors.required">
-              Address is required.
+              Mangler en start Adresse
             </div>
           </div>
         </td>
@@ -17,7 +17,7 @@
           <div *ngIf="getEndAddress.invalid && (getEndAddress.dirty || getEndAddress.touched)"
                class="alert alert-danger">
             <div *ngIf="getEndAddress.errors.required">
-              Address is required.
+              Mangler en slut Adresse
             </div>
           </div>
         </td>
@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-  <table class="table col-lg-12">
+  <table id="infotable" class="table col-lg-12">
     <thead>
       <tr>
         <th scope="col" class="text-center">Dato</th>

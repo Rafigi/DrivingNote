@@ -1,7 +1,9 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalComponent } from '../CustomComponents/modal/modal.component';
-import * as jsPDF from 'jspdf'
+import { TabelComponent } from '../tabel/tabel.component';
+import { ApiService } from '../../Services/api.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,13 +12,15 @@ import * as jsPDF from 'jspdf'
 })
 /** Home component*/
 export class HomeComponent implements OnInit {
+
+
+
   /** Home ctor */
-  constructor() {
+  constructor(private apiService: ApiService) {
 
   }
 
   ngOnInit(): void {
-    this.CreatejsPdf();
   }
 
   //To get the methods from a child component.
@@ -31,19 +35,14 @@ export class HomeComponent implements OnInit {
   });
 
 
-  SendNote() {
+  SendNote(elementData: string) {
 
     if (this.infoForm.invalid)
       return;
 
-    console.log("You have sent the information now.");
-    this.modal.CloseModal();
-  }
 
-  CreateThePDF() {
-    var doc = new jsPDF();
-    doc.text('Hello world!', 10, 10)
-    doc.save('a4.pdf')
+    this.apiService.SendMail(elementData);
+    this.modal.CloseModal();
   }
 
 

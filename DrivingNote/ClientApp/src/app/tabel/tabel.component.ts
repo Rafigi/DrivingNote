@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Cell from '../../Models/Cell';
 declare var google;
@@ -26,7 +26,7 @@ export class TabelComponent implements OnInit {
   endAddress: ElementRef;
 
   cellForm = new FormGroup({
-    date: new FormControl(this.createNowDate()),
+    date: new FormControl(this.CreateDateOfToday()),
     startAddress: new FormControl(null, Validators.required),
     endAddress: new FormControl(null, Validators.required),
     distance: new FormControl('')
@@ -46,7 +46,7 @@ export class TabelComponent implements OnInit {
 
   }
 
-  private createNowDate(): string {
+  private CreateDateOfToday(): string {
     let today = new Date();
     let dd: string = today.getDate().toString();
     let mm: string = (today.getMonth() + 1).toString(); //January is 0!
@@ -144,8 +144,6 @@ export class TabelComponent implements OnInit {
     this.Distance();
   }
 
-
-
   public addCell(): void {
 
     if (!this.cellForm.invalid) {
@@ -162,6 +160,8 @@ export class TabelComponent implements OnInit {
       this.TableArray.push(newCell);
       this.clearForms();
     }
+
+    console.log(document.getElementById("infotable"))
   }
 
   public deleteCell(cell: Cell): void {
@@ -173,7 +173,7 @@ export class TabelComponent implements OnInit {
   }
 
   private clearForms() {
-    this.cellForm.get("date").setValue(this.createNowDate());
+    this.cellForm.get("date").setValue(this.CreateDateOfToday());
     this.cellForm.get("startAddress").reset();
     this.cellForm.get("endAddress").reset();
     this._roundTrip = false;
