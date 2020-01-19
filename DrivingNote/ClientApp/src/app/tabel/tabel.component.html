@@ -4,7 +4,7 @@
       <tr class="_inputRow col-lg-12" [formGroup]="cellForm">
         <td class="text-lg-center"><input formControlName="date" type="date" /> </td>
         <td class="text-lg-center">
-          <input formControlName="startAddress" (keydown)="initStartInput($event)" #startAddress placeholder="Start Adresse" type="text" />
+          <input formControlName="startAddress" (keydown)="initStartInput($event)" #startAddressRef placeholder="Start Adresse" type="text" />
           <div *ngIf="getStartAddress.invalid && (getStartAddress.dirty || getStartAddress.touched)"
                class="alert alert-danger">
             <div *ngIf="getStartAddress.errors.required">
@@ -13,7 +13,7 @@
           </div>
         </td>
         <td class="text-lg-center">
-          <input formControlName="endAddress" (keydown)="initEndInput($event)" #endAddress placeholder="Slut Adresse" type="text" />
+          <input formControlName="endAddress" (keydown)="initEndInput($event)" #endAddressRef placeholder="Slut Adresse" type="text" />
           <div *ngIf="getEndAddress.invalid && (getEndAddress.dirty || getEndAddress.touched)"
                class="alert alert-danger">
             <div *ngIf="getEndAddress.errors.required">
@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-  <table id="infotable" class="table col-lg-12">
+  <table #infoTableHTML class="table col-lg-12">
     <thead>
       <tr>
         <th scope="col" class="text-center">Dato</th>

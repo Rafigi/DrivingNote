@@ -13,7 +13,7 @@ import { ApiService } from '../../Services/api.service';
 /** Home component*/
 export class HomeComponent implements OnInit {
 
-
+  private _elementData: string;
 
   /** Home ctor */
   constructor(private apiService: ApiService) {
@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
   @ViewChild(ModalComponent)
   modal: ModalComponent;
 
+  @ViewChild(TabelComponent)
+  table: TabelComponent;
+
   infoForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     lastname: new FormControl(null, Validators.required),
@@ -35,15 +38,17 @@ export class HomeComponent implements OnInit {
   });
 
 
-  SendNote(elementData: string) {
+  SendNote() {
 
     if (this.infoForm.invalid)
       return;
 
-
-    this.apiService.SendMail(elementData);
+    this.apiService.SendMail(this._elementData);
     this.modal.CloseModal();
   }
+
+
+
 
 
   //Getters for error validations

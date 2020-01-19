@@ -5,7 +5,7 @@
     <button class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>
   </div>
 
-  <app-tabel #table></app-tabel>
+  <app-tabel (messageHTML)="receiveMessage($event)" #table></app-tabel>
 </div>
 
 <!--This is for showing the modal-->
@@ -61,9 +61,9 @@
 
   </form>
 
-
+  <!--The buttons for the modal-->
   <div>
-    <button (click)="SendNote(table.elementData)" class="_cylinderbutton _cylinderbutton-left">Send til forening</button>
-    <button (click)="modal.CloseModal()" class="_cylinderbutton _cylinderbutton-right">Hov! Jeg glemte noget</button>
+    <button (click)="SendNote()" class="_cylinderbutton _cylinderbutton-left">Send til min forening</button>
+    <button (click)="modal.CloseModal()" class="_cylinderbutton _cylinderbutton-right">Hov! Jeg glemte nogle kørsler</button>
   </div>
 </app-modal>

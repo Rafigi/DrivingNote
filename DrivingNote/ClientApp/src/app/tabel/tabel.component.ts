@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Cell from '../../Models/Cell';
-declare var google;
+declare var google; //Need to declare google, so the script will work.
 
 @Component({
   selector: 'app-tabel',
@@ -19,11 +19,14 @@ export class TabelComponent implements OnInit {
   private endAddressResult: string;
   private distanceResult: string;
 
-  @ViewChild('startAddress')
-  startAddress: ElementRef;
+  @ViewChild('infoTableHTML')
+  infoTableHTMLRef: ElementRef;
 
-  @ViewChild('endAddress')
-  endAddress: ElementRef;
+  @ViewChild('startAddressRef')
+  startAddressRef: ElementRef;
+
+  @ViewChild('endAddressRef')
+  endAddressRef: ElementRef;
 
   options: any = {
     componentRestrictions: { country: 'dk' }
@@ -63,8 +66,8 @@ export class TabelComponent implements OnInit {
   }
 
 
-  initStartInput(event) {
-    let input = this.startAddress.nativeElement;
+  private initStartInput(event) {
+    let input = this.startAddressRef.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
     this.CalculateDistanceFromTheTwoInputs();
     //Need this because, when user press. "Enter" then the form will be reset to length 0.
@@ -73,8 +76,8 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  initEndInput(event) {
-    let input = this.endAddress.nativeElement;
+  private initEndInput(event) {
+    let input = this.endAddressRef.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
     this.CalculateDistanceFromTheTwoInputs();
 
@@ -84,7 +87,7 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  CalculateDistanceFromTheTwoInputs() {
+  private CalculateDistanceFromTheTwoInputs() {
     if (this.cellForm.invalid)
       return;
 
@@ -148,7 +151,6 @@ export class TabelComponent implements OnInit {
       this.clearForms();
     }
 
-    console.log(document.getElementById("infotable"))
   }
 
   public deleteCell(cell: Cell): void {
@@ -159,7 +161,7 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  //The actualy clear will not clear.
+  //The actually clear for reactive forms will not clear.
   private clearForms() {
     this.cellForm.get("date").setValue(this.CreateDateOfToday());
     this.cellForm.get("startAddress").reset();
@@ -173,7 +175,7 @@ export class TabelComponent implements OnInit {
   get getEndAddress() { return this.cellForm.get('endAddress'); }
 
   //For Creating a script outside of the index.html file. 
-  CreateGoogleAutoScript() {
+  private CreateGoogleAutoScript() {
     let key = 'AIzaSyBM4dBYGewehvlFZyudquC5fQnPmxoblhc';
     return new Promise(resolve => {
       const scriptElement = document.createElement('script');
