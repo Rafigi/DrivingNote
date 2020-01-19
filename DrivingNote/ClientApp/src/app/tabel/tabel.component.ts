@@ -25,6 +25,11 @@ export class TabelComponent implements OnInit {
   @ViewChild('endAddress')
   endAddress: ElementRef;
 
+  options: any = {
+    componentRestrictions: { country: 'dk' }
+  };
+
+  //Forms
   cellForm = new FormGroup({
     date: new FormControl(this.CreateDateOfToday()),
     startAddress: new FormControl(null, Validators.required),
@@ -32,14 +37,10 @@ export class TabelComponent implements OnInit {
     distance: new FormControl('')
   });
 
-
-
-
   ngOnInit() {
-    this.CreateGoogleAuto();
+    this.CreateGoogleAutoScript();
     this.cellForm.get("distance").disable();
   }
-
 
   /** Table ctor */
   constructor() {
@@ -62,25 +63,11 @@ export class TabelComponent implements OnInit {
   }
 
 
-  //For Creating a script outside of the index.html file. 
-  CreateGoogleAuto() {
-    let key = 'AIzaSyBM4dBYGewehvlFZyudquC5fQnPmxoblhc';
-    return new Promise(resolve => {
-      const scriptElement = document.createElement('script');
-      scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
-      scriptElement.onload = resolve;
-      document.body.appendChild(scriptElement);
-    });
-  }
-
-  options: any = {
-    componentRestrictions: { country: 'dk' }
-  };
-
   initStartInput(event) {
     let input = this.startAddress.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
-    this.Distance();
+    this.CalculateDistanceFromTheTwoInputs();
+    //Need this because, when user press. "Enter" then the form will be reset to length 0.
     if (event.key == "Enter") {
       this.cellForm.get("startAddress").setValue(input.value);
     }
@@ -89,15 +76,15 @@ export class TabelComponent implements OnInit {
   initEndInput(event) {
     let input = this.endAddress.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
-    this.Distance();
+    this.CalculateDistanceFromTheTwoInputs();
 
-    //Need this because, when user enter then form will be reset to length off 0.
+    //Need this because, when user press. "Enter" then the form will be reset to length 0.
     if (event.key == "Enter") {
       this.cellForm.get("endAddress").setValue(input.value);
     }
   }
 
-  Distance() {
+  CalculateDistanceFromTheTwoInputs() {
     if (this.cellForm.invalid)
       return;
 
@@ -139,9 +126,9 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  RouteTripSwitch(value) {
+  private RouteTripSwitch(value) {
     this._roundTrip = value;
-    this.Distance();
+    this.CalculateDistanceFromTheTwoInputs();
   }
 
   public addCell(): void {
@@ -172,6 +159,7 @@ export class TabelComponent implements OnInit {
     }
   }
 
+  //The actualy clear will not clear.
   private clearForms() {
     this.cellForm.get("date").setValue(this.CreateDateOfToday());
     this.cellForm.get("startAddress").reset();
@@ -180,8 +168,19 @@ export class TabelComponent implements OnInit {
     this.cellForm.get("distance").setValue('');
   }
 
+  //getters for the forms
   get getStartAddress() { return this.cellForm.get('startAddress'); }
   get getEndAddress() { return this.cellForm.get('endAddress'); }
 
+  //For Creating a script outside of the index.html file. 
+  CreateGoogleAutoScript() {
+    let key = 'AIzaSyBM4dBYGewehvlFZyudquC5fQnPmxoblhc';
+    return new Promise(resolve => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+      scriptElement.onload = resolve;
+      document.body.appendChild(scriptElement);
+    });
+  }
 
 }
