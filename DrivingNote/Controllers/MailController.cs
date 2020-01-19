@@ -16,7 +16,8 @@
             _hostingEnvironment = hostingEnvironment;
         }
 
-        IActionResult SendMail(UserInfo userInfo, string drivingNote)
+        [HttpPost("SendMail")]
+        public IActionResult SendMail([FromBody] UserInfo userInfo)
         {
             PDFFactory PDFFactory = new PDFFactory(_hostingEnvironment);
            // var pdf = PDFFactory.Create(drivingNote);

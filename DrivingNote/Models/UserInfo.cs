@@ -12,5 +12,6 @@ namespace DrivingNote.Models
         public string Email { get; set; }
         public string Sport { get; set; }
         public string AccountNumber { get; set; }
+        public string HTML_Table { get; set; }
     }
 }

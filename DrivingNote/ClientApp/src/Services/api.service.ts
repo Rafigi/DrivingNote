@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import UserInfo from '../Models/Userinfo';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,13 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private readonly _localApiString: string = 'https://localhost:44336/'
+  private readonly myAppUrl: string;
 
   constructor(private http: HttpClient) {
-
+    this.myAppUrl = environment.appUrl;
   }
 
-  SendMail(data: string): Observable<object> {
-    return this.http.post(this._localApiString, data);
+  private readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
+  SendMail(userInfo: UserInfo): Observable<string> {
+    return this.http.post<string>(`${this.myAppUrl}/mail/sendmail`, userInfo, this.httpOptions);
   }
 }

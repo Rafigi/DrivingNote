@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalComponent } from '../CustomComponents/modal/modal.component';
 import { TabelComponent } from '../tabel/tabel.component';
 import { ApiService } from '../../Services/api.service';
+import UserInfo from '../../Models/UserInfo';
 
 
 @Component({
@@ -35,16 +36,31 @@ export class HomeComponent implements OnInit {
     lastname: new FormControl(null, Validators.required),
     mail: new FormControl(null, Validators.required),
     sport: new FormControl('', Validators.required),
+    accountNumber: new FormControl(null, Validators.required),
   });
 
 
   SendNote() {
+    console.log("Send");
 
-    if (this.infoForm.invalid)
-      return;
 
-    //this.apiService.SendMail(this._elementData);
-    this.modal.CloseModal();
+    if (!this.infoForm.invalid) {
+      var userInfo = new UserInfo(
+        this.getName.value,
+        this.getLastname.value,
+        this.getMail.value,
+        this.getSport.value,
+        this.getAccountNumber.value,
+        this._elementData
+      )
+
+      console.log("Send");
+      this.infoForm.reset;
+      this.apiService.SendMail(userInfo).subscribe((response) => {
+        //if (response == 'Ok')
+        this.modal.CloseModal();
+      });
+    }
   }
 
 
@@ -56,5 +72,6 @@ export class HomeComponent implements OnInit {
   get getLastname() { return this.infoForm.get('lastname'); }
   get getMail() { return this.infoForm.get('mail'); }
   get getSport() { return this.infoForm.get('sport'); }
+  get getAccountNumber() { return this.infoForm.get('accountNumber'); }
 
 }
