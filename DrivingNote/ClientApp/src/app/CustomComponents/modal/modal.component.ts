@@ -8,7 +8,7 @@ import { Component, Output, EventEmitter, Input, ElementRef, OnInit, OnDestroy }
 /** Modal component*/
 export class ModalComponent implements OnInit {
 
-  private show: boolean = false;
+  show: boolean = false;
   private element: any;
 
   /** Modal ctor */

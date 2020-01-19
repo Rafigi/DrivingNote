@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     if (this.infoForm.invalid)
       return;
 
-    this.apiService.SendMail(this._elementData);
+    //this.apiService.SendMail(this._elementData);
     this.modal.CloseModal();
   }
 

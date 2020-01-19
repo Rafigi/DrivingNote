@@ -11,7 +11,7 @@ declare var google; //Need to declare google, so the script will work.
 /** Tabel component*/
 export class TabelComponent implements OnInit {
   //Variables 
-  private TableArray: Cell[] = [];
+  TableArray: Cell[] = [];
   private id: number = 0;
   _roundTrip: boolean = false;
 
@@ -66,7 +66,7 @@ export class TabelComponent implements OnInit {
   }
 
 
-  private initStartInput(event) {
+  initStartInput(event) {
     let input = this.startAddressRef.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
     this.CalculateDistanceFromTheTwoInputs();
@@ -76,7 +76,7 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  private initEndInput(event) {
+  initEndInput(event) {
     let input = this.endAddressRef.nativeElement;
     new google.maps.places.Autocomplete(input, this.options);
     this.CalculateDistanceFromTheTwoInputs();
@@ -129,7 +129,7 @@ export class TabelComponent implements OnInit {
     }
   }
 
-  private RouteTripSwitch(value) {
+  RouteTripSwitch(value) {
     this._roundTrip = value;
     this.CalculateDistanceFromTheTwoInputs();
   }

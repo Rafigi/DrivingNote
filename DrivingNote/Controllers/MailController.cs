@@ -1,6 +1,7 @@
 ﻿namespace DrivingNote.Controllers
 {
     using DrivingNote.Actions;
+    using DrivingNote.Models;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@
             _hostingEnvironment = hostingEnvironment;
         }
 
-        IActionResult SendMail(string drivingNote)
+        IActionResult SendMail(UserInfo userInfo, string drivingNote)
         {
             PDFFactory PDFFactory = new PDFFactory(_hostingEnvironment);
            // var pdf = PDFFactory.Create(drivingNote);
