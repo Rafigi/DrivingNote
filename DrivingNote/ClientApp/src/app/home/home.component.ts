@@ -41,9 +41,6 @@ export class HomeComponent implements OnInit {
 
 
   SendNote() {
-    console.log("Send");
-
-
     if (!this.infoForm.invalid) {
       var userInfo = new UserInfo(
         this.getName.value,
@@ -54,10 +51,9 @@ export class HomeComponent implements OnInit {
         this._elementData
       )
 
-      console.log("Send");
-      this.infoForm.reset;
+      this.getMail.reset;
       this.apiService.SendMail(userInfo).subscribe((response) => {
-        //if (response == 'Ok')
+        if (response['message'] == 'Created and Sent')
         this.modal.CloseModal();
       });
     }

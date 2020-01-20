@@ -21,7 +21,7 @@ export class ApiService {
     })
   };
 
-  SendMail(userInfo: UserInfo): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}/mail/sendmail`, userInfo, this.httpOptions);
+  SendMail(userInfo: UserInfo) {
+    return this.http.post(`${this.myAppUrl}/mail/sendmail`, userInfo, this.httpOptions);
   }
 }
