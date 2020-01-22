@@ -14,8 +14,6 @@ import UserInfo from '../../Models/UserInfo';
 /** Home component*/
 export class HomeComponent implements OnInit {
 
-  private _elementData: string;
-
   /** Home ctor */
   constructor(private apiService: ApiService) {
 
@@ -41,27 +39,21 @@ export class HomeComponent implements OnInit {
 
 
   SendNote() {
-    if (!this.infoForm.invalid) {
-      var userInfo = new UserInfo(
-        this.getName.value,
-        this.getLastname.value,
-        this.getMail.value,
-        this.getSport.value,
-        this.getAccountNumber.value,
-        this._elementData
-      )
+    //if (!this.infoForm.invalid) {
+    //  var userInfo = new UserInfo(
+    //    this.getName.value,
+    //    this.getLastname.value,
+    //    this.getMail.value,
+    //    this.getSport.value,
+    //    this.getAccountNumber.value,
+    //    this.table.Cells
+    //  );
+    //}
 
-      this.getMail.reset;
-      this.apiService.SendMail(userInfo).subscribe((response) => {
-        if (response['message'] == 'Created and Sent')
-        this.modal.CloseModal();
-      });
-    }
+    this.table.GenerateTheTableInPDF();
+
+      this.modal.CloseModal();
   }
-
-
-
-
 
   //Getters for error validations
   get getName() { return this.infoForm.get('name'); }

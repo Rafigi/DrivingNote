@@ -1,6 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import Cell from '../../Models/Cell';
+import * as jspdf from 'jspdf';
+
+import html2canvas from 'html2canvas';
+import { Cell } from '../../Models/Cell';
 declare var google; //Need to declare google, so the script will work.
 
 @Component({
@@ -9,9 +12,12 @@ declare var google; //Need to declare google, so the script will work.
   styleUrls: ['./tabel.component.scss']
 })
 /** Tabel component*/
-export class TabelComponent implements OnInit {
+export class TabelComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+
+  }
   //Variables 
-  TableArray: Cell[] = [];
+  Cells: Cell[] = [];
   private id: number = 0;
   _roundTrip: boolean = false;
 
@@ -19,14 +25,14 @@ export class TabelComponent implements OnInit {
   private endAddressResult: string;
   private distanceResult: string;
 
-  @ViewChild('infoTableHTML')
-  infoTableHTMLRef: ElementRef;
-
   @ViewChild('startAddressRef')
   startAddressRef: ElementRef;
 
   @ViewChild('endAddressRef')
   endAddressRef: ElementRef;
+
+  @ViewChild('data')
+  data: ElementRef;
 
   options: any = {
     componentRestrictions: { country: 'dk' }
@@ -134,30 +140,65 @@ export class TabelComponent implements OnInit {
     this.CalculateDistanceFromTheTwoInputs();
   }
 
+
+
+  GenerateTheTableInPDF() {
+    var elementHandler = {
+      '#ignorePDF': function (element, renderer) {
+        return true;
+      }
+    };
+    var data = this.data.nativeElement;
+    //var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options  
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 10;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('DrivingNote.pdf'); // Generated PDF
+    });
+
+    //console.log(source);
+    //doc.fromHTML(
+    //  source,
+    //  15,
+    //  15,
+    //  {
+    //    'width': 20, 'elementHandlers': elementHandler
+    //  });
+
+    //doc.output("dataurlnewwindow");
+  }
+
   public addCell(): void {
 
     if (!this.cellForm.invalid) {
-      let newCell = new Cell(this.id,
-        this.cellForm.get("date").value,
-        this.startAddressResult,
-        this.endAddressResult,
-        this._roundTrip,
-        this.distanceResult
-      );
-
-
+      let newCell: Cell = {
+        id: this.id,
+        Date: this.cellForm.get("date").value,
+        StartAddress: this.startAddressResult[0],
+        EndAddress: this.endAddressResult[0],
+        RoundTrip: this._roundTrip,
+        Distance: this.distanceResult
+      }
+      this.Cells.push(newCell);
       this.id++;
-      this.TableArray.push(newCell);
       this.clearForms();
     }
-
   }
 
+
   public deleteCell(cell: Cell): void {
-    let index = this.TableArray.indexOf(cell);
+    let index = this.Cells.indexOf(cell);
     if (index != -1) {
       //This is to remove the object in the right index.
-      this.TableArray.splice(index, 1);
+      this.Cells.splice(index, 1);
     }
   }
 

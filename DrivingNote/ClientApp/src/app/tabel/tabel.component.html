@@ -27,7 +27,7 @@
     </tbody>
   </table>
 
-  <table #infoTableHTML class="table col-lg-12">
+  <table #data class="table col-lg-12">
     <thead>
       <tr>
         <th scope="col" class="text-center">Dato</th>
@@ -38,13 +38,13 @@
       </tr>
     </thead>
     <tbody class="_infoRow col-lg-12">
-      <tr *ngFor="let cell of TableArray">
+      <tr *ngFor="let cell of Cells">
         <td class="text-lg-center">  {{cell.Date}} </td>
         <td class="text-lg-center"> {{cell.StartAddress}} </td>
         <td class="text-lg-center"> {{cell.EndAddress}}  </td>
         <td class="text-lg-center"> {{cell.RoundTrip}} </td>
         <td class="text-lg-center"> {{cell.Distance}} </td>
-        <td class="_btnColumn">
+        <td class="_btnColumn" data-html2canvas-ignore>
           <a class="_deleteBtn" (click)="deleteCell(cell)">
             <app-delete-btn></app-delete-btn>
           </a>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DrivingNote.Models
 {
@@ -12,6 +9,6 @@ namespace DrivingNote.Models
         public string Email { get; set; }
         public string Sport { get; set; }
         public string AccountNumber { get; set; }
-        public string HTML_Table { get; set; }
+        public List<HTMLTable> HTMLTable { get; set; }
     }
 }

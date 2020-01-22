@@ -1,17 +1,8 @@
-export default class Cell {
+export class Cell {
   id: number;
   Date: Date;
   StartAddress: string;
   EndAddress: string;
   RoundTrip: boolean;
   Distance: string;
-
-  constructor(id: number, date: Date, StartAddress: string, EndAddress: string, roundTrip: boolean, distance: string) {
-    this.id = id;
-    this.Date = date;
-    this.StartAddress = StartAddress;
-    this.EndAddress = EndAddress;
-    this.RoundTrip = roundTrip;
-    this.Distance = distance;
-  }
 }

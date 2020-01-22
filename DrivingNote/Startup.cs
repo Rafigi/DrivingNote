@@ -22,6 +22,20 @@ namespace DrivingNote
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS", corsPolicyBuilder => corsPolicyBuilder
+                .AllowAnyOrigin()
+                // Apply CORS policy for any type of origin  
+                .AllowAnyMethod()
+                // Apply CORS policy for any type of http methods  
+                .AllowAnyHeader()
+                // Apply CORS policy for any headers  
+                .AllowCredentials());
+                // Apply CORS policy for all users  
+            });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
