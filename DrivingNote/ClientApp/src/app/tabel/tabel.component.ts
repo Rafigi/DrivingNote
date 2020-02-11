@@ -158,41 +158,6 @@ export class TabelComponent implements OnInit, AfterViewInit {
   }
 
 
-
-  GenerateTheTableInPDF() {
-    var elementHandler = {
-      '#ignorePDF': function (element, renderer) {
-        return true;
-      }
-    };
-    var data = this.data.nativeElement;
-    //var data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options  
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 10;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('DrivingNote.pdf'); // Generated PDF
-    });
-
-    //console.log(source);
-    //doc.fromHTML(
-    //  source,
-    //  15,
-    //  15,
-    //  {
-    //    'width': 20, 'elementHandlers': elementHandler
-    //  });
-
-    //doc.output("dataurlnewwindow");
-  }
-
   public addCell(): void {
 
     if (!this.cellForm.invalid) {
@@ -234,7 +199,7 @@ export class TabelComponent implements OnInit, AfterViewInit {
 
   //For Creating a script outside of the index.html file. 
   private CreateGoogleAutoScript() {
-  
+    let key = 'AIzaSyBM4dBYGewehvlFZyudquC5fQnPmxoblhc';
     return new Promise(resolve => {
       const scriptElement = document.createElement('script');
       scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
