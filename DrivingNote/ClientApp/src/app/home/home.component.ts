@@ -5,7 +5,6 @@ import { TabelComponent } from '../tabel/tabel.component';
 import { ApiService } from '../../Services/api.service';
 import UserInfo from '../../Models/UserInfo';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(TabelComponent)
   table: TabelComponent;
 
-  infoForm = new FormGroup({
+  informationForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     lastname: new FormControl(null, Validators.required),
     mail: new FormControl(null, Validators.required),
@@ -37,29 +36,33 @@ export class HomeComponent implements OnInit {
     accountNumber: new FormControl(null, Validators.required),
   });
 
-
   SendNote() {
-    //if (!this.infoForm.invalid) {
-    //  var userInfo = new UserInfo(
-    //    this.getName.value,
-    //    this.getLastname.value,
-    //    this.getMail.value,
-    //    this.getSport.value,
-    //    this.getAccountNumber.value,
-    //    this.table.Cells
-    //  );
-    //}
+    if (!this.informationForm.invalid) {
+      var userInfo = new UserInfo(
+        this.getName.value,
+        this.getLastname.value,
+        this.getMail.value,
+        this.getSport.value,
+        this.getAccountNumber.value,
+        this.table.Cells
+      );
+    }
 
-    this.table.GenerateTheTableInPDF();
+    this.apiService.SendMail(userInfo).subscribe((response) => {
+      let blob: any = new Blob([response], { type: 'application/pdf' });
 
-      this.modal.CloseModal();
+      var fileURL = URL.createObjectURL(blob);
+      window.open(fileURL);
+    });
+
+    this.modal.CloseModal();
   }
 
   //Getters for error validations
-  get getName() { return this.infoForm.get('name'); }
-  get getLastname() { return this.infoForm.get('lastname'); }
-  get getMail() { return this.infoForm.get('mail'); }
-  get getSport() { return this.infoForm.get('sport'); }
-  get getAccountNumber() { return this.infoForm.get('accountNumber'); }
+  get getName() { return this.informationForm.get('name'); }
+  get getLastname() { return this.informationForm.get('lastname'); }
+  get getMail() { return this.informationForm.get('mail'); }
+  get getSport() { return this.informationForm.get('sport'); }
+  get getAccountNumber() { return this.informationForm.get('accountNumber'); }
 
 }
