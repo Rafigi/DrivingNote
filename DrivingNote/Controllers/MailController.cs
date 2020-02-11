@@ -6,10 +6,6 @@
     using Microsoft.AspNetCore.Mvc;
     using SelectPdf;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -35,17 +31,14 @@
             converter.Options.MarginRight = 10;
             converter.Options.MarginTop = 20;
             converter.Options.MarginBottom = 20;
-            //converter.Options.CustomCSS = _hostingEnvironment.WebRootPath + @"/css/tabel.css";
 
             var HTMLTabel = TemplateGenerator.GetHTMLString(FillInInfo(), _hostingEnvironment);
+
             // create a new pdf document converting an url
             PdfDocument doc = converter.ConvertHtmlString(HTMLTabel);
 
             return File(doc.Save(), "application/pdf");
         }
-
-
-
 
         private UserInfo FillInInfo()
         {

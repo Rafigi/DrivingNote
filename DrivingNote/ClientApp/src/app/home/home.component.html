@@ -2,7 +2,7 @@
   <h1 class="text-center">Blanket for at oprette kørselsseddel.</h1>
   <div class="col-md-12 d-flex justify-content-between">
     <button class="col-md-3 _cylinderbutton _cylinderbutton-left" (click)="table.addCell()">Tilføj Ny Række</button>
-    <button *ngIf="" class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>
+    <button *ngIf="table.getCellCount() > 0" class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>
   </div>
 
   <app-tabel #table></app-tabel>

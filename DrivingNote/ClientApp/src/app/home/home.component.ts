@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalComponent } from '../CustomComponents/modal/modal.component';
 import { TabelComponent } from '../tabel/tabel.component';
