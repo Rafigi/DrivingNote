@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalComponent } from '../CustomComponents/modal/modal.component';
 import { TabelComponent } from '../tabel/tabel.component';
 import { ApiService } from '../../Services/api.service';
-import UserInfo from '../../Models/UserInfo';
+import UserInformation from '../../Models/UserInformation';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
 
   SendNote() {
     if (!this.informationForm.invalid) {
-      var userInfo = new UserInfo(
+      var userInformation = new UserInformation(
         this.getName.value,
         this.getLastname.value,
         this.getMail.value,
@@ -46,16 +47,26 @@ export class HomeComponent implements OnInit {
         this.getAccountNumber.value,
         this.table.Cells
       );
+      this.apiService.SendMail(userInformation).subscribe(response => {
+        let blob: any = new Blob([response], { type: 'application/pdf' });
+
+        var fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
+
+        this.modal.CloseModal();
+
+      }, (err: HttpErrorResponse) => {
+        if (err.status == 415 || err.status == 404) {
+          console.log("There is something wrong with the information ýour sending?!");
+          console.log(userInformation);
+        }
+        if (err.status == 500) {
+          console.log("There is no server to help you!");
+        }
+      });
     }
 
-    this.apiService.SendMail(userInfo).subscribe((response) => {
-      let blob: any = new Blob([response], { type: 'application/pdf' });
 
-      var fileURL = URL.createObjectURL(blob);
-      window.open(fileURL);
-    });
-
-    this.modal.CloseModal();
   }
 
   //Getters for error validations

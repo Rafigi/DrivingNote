@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cell } from '../../Models/Cell';
 declare var google; //Need to declare google, so the script will work.
@@ -9,10 +9,7 @@ declare var google; //Need to declare google, so the script will work.
   styleUrls: ['./tabel.component.scss']
 })
 /** Tabel component*/
-export class TabelComponent implements OnInit, AfterViewInit {
-  ngAfterViewInit(): void {
-
-  }
+export class TabelComponent implements OnInit {
   //Variables 
   Cells: Cell[] = [];
   private id: number = 0;
@@ -121,7 +118,6 @@ export class TabelComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   private calculateDistance(input: string) {
     let distanceArray = input.split(" ");
 
@@ -148,9 +144,13 @@ export class TabelComponent implements OnInit, AfterViewInit {
         Date: this.cellForm.get("date").value,
         StartAddress: this.startAddressResult[0],
         EndAddress: this.endAddressResult[0],
-        RoundTrip: this._roundTrip,
+        RoundTrip: this._roundTrip ? "Ja": "Nej",
         Distance: this.distanceResult
       }
+
+      //Need these, so the input har untouched again, when a new cell is added to the table.
+      this.getStartAddress.markAsUntouched();
+      this.getEndAddress.markAsUntouched();
 
       this.Cells.push(newCell);
       this.id++;
@@ -177,7 +177,7 @@ export class TabelComponent implements OnInit, AfterViewInit {
     }
   }
 
-  //The actually clear for reactive forms will not clear.
+  //The actually clear for reactive forms will not clear all the forms.
   private clearForms() {
     this.cellForm.get("date").setValue(this.CreateDateOfToday());
     this.cellForm.get("startAddress").reset();
@@ -186,13 +186,12 @@ export class TabelComponent implements OnInit, AfterViewInit {
     this.cellForm.get("distance").setValue('');
   }
 
-  //getters for the forms
+  //getters for the forms, so we can to error control.
   get getStartAddress() { return this.cellForm.get('startAddress'); }
   get getEndAddress() { return this.cellForm.get('endAddress'); }
 
   //For Creating a script outside of the index.html file. 
   private CreateGoogleAutoScript() {
-    let key = '';
     return new Promise(resolve => {
       const scriptElement = document.createElement('script');
       scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;

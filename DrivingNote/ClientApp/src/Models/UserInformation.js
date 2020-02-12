@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserInfo = /** @class */ (function () {
-    function UserInfo(name, lastname, email, sport, accountNumber, htmlTable) {
+var UserInformation = /** @class */ (function () {
+    function UserInformation(name, lastname, email, sport, accountNumber, tableInfomation) {
         this.Name = name;
         this.LastName = lastname;
         this.Email = email;
         this.Sport = sport;
         this.AccountNumber = accountNumber;
-        this.HTMLTable = htmlTable;
+        this.TableInfomation = tableInfomation;
     }
-    return UserInfo;
+    return UserInformation;
 }());
-exports.default = UserInfo;
+exports.default = UserInformation;
 //# sourceMappingURL=UserInfo.js.map

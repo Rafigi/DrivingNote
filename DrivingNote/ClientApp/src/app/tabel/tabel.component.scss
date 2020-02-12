@@ -41,23 +41,18 @@ thead {
 ._infoRow {
   tr:nth-child(even) {
     background: rgba(238, 226, 255, 0.6);
+    max-height: 200px;
   }
 
   tr:nth-child(odd) {
     background: rgba(238, 226, 255, 1);
   }
 
-  _deleteBtn {
-    padding-right: 250px;
-    z-index: 20;
-    position: relative;
-  }
-
   ._btnColumn {
     position: absolute;
     border-style: none;
-    padding-left: 110px;
-    margin-top: -45px;
+    padding-left: 96px;
+    margin-top: -31px;
     float: right;
   }
 }

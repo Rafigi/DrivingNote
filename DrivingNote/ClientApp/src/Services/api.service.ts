@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import UserInfo from '../Models/Userinfo';
+import UserInformation from '../Models/UserInformation';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class ApiService {
   };
 
 
-  SendMail(userInfo: UserInfo): Observable<Blob> {
-    return this.http.post<any>(`${this.myAppUrl}/api/mail/sendmail`, userInfo, this.httpOptions);
+  SendMail(userInformation: UserInformation): Observable<Blob> {
+    return this.http.post<any>(`${this.myAppUrl}/api/mail/sendmail`, userInformation, this.httpOptions);
   }
 }
