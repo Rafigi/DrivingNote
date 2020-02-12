@@ -151,9 +151,20 @@ export class TabelComponent implements OnInit, AfterViewInit {
         RoundTrip: this._roundTrip,
         Distance: this.distanceResult
       }
+
       this.Cells.push(newCell);
       this.id++;
       this.clearForms();
+    }
+    this.IsAdressesFilled();
+  }
+
+  private IsAdressesFilled(): void {
+    if (this.getStartAddress.untouched) {
+      this.getStartAddress.markAsTouched();
+    }
+    if (this.getEndAddress.untouched) {
+      this.getEndAddress.markAsTouched();
     }
   }
 

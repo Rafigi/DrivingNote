@@ -28,8 +28,15 @@ thead {
       text-align: center;
       font-size: large;
     }
+
+    .errorMessage {
+      font-size: 15px;
+      font-style:oblique;
+    }
   }
 }
+
+
 
 ._infoRow {
   tr:nth-child(even) {
