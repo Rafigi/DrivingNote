@@ -48,13 +48,16 @@ thead {
   }
 
   _deleteBtn {
-    padding-left: 20px;
-    position: absolute;
+    padding-right: 250px;
+    z-index: 20;
+    position: relative;
   }
 
   ._btnColumn {
-    background-color: white;
+    position: absolute;
     border-style: none;
-    padding-left: 0px;
+    padding-left: 110px;
+    margin-top: -45px;
+    float: right;
   }
 }
