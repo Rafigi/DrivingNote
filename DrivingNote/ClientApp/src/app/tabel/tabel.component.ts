@@ -98,6 +98,7 @@ export class TabelComponent implements OnInit, AfterViewInit {
     let startInput: string = this.cellForm.get("startAddress").value;
     let endInput: string = this.cellForm.get("endAddress").value;
 
+    //We need first to calculate, when there i more than 5 letters, when start and end address. 
     if (startInput.length > 5 && endInput.length > 5) {
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix(
@@ -180,6 +181,7 @@ export class TabelComponent implements OnInit, AfterViewInit {
 
   //For Creating a script outside of the index.html file. 
   private CreateGoogleAutoScript() {
+    let key = 'AIzaSyBM4dBYGewehvlFZyudquC5fQnPmxoblhc';
     return new Promise(resolve => {
       const scriptElement = document.createElement('script');
       scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
