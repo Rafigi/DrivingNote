@@ -1,6 +1,6 @@
 export class Cell {
   id: number;
-  Date: Date;
+  Date: string;
   StartAddress: string;
   EndAddress: string;
   RoundTrip: string;
