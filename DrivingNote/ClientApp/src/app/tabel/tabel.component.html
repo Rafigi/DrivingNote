@@ -30,11 +30,11 @@
   <table class="table col-lg-12">
     <thead>
       <tr>
-        <th scope="col" class="text-center">Dato</th>
-        <th scope="col" class="text-center">Start Adresse</th>
-          <th scope="col" class="text-center">Slut Adresse</th>
-          <th scope="col" class="text-center">Tur/retur</th>
-          <th scope="col" class="text-center">Distance</th>
+        <th class="text-lg-center">Dato</th>
+        <th class="text-lg-center">Start Adresse</th>
+        <th class="text-lg-center">Slut Adresse</th>
+        <th class="text-lg-center">Tur/retur</th>
+        <th class="text-lg-center">Distance</th>
       </tr>
     </thead>
     <tbody class="_infoRow col-lg-12">
@@ -43,11 +43,13 @@
         <td class="text-lg-center"> {{cell.StartAddress}} </td>
         <td class="text-lg-center"> {{cell.EndAddress}}  </td>
         <td class="text-lg-center"> {{cell.RoundTrip}} </td>
-        <td class="text-lg-center"> {{cell.Distance}} </td>
-        <td class="_btnColumn" data-html2canvas-ignore>
-          <a class="_deleteBtn" (click)="deleteCell(cell)">
-            <app-delete-btn></app-delete-btn>
-          </a>
+        <td class="text-lg-center">
+          {{cell.Distance}}
+          <div class="_btnColumn">
+            <a class="" (click)="deleteCell(cell)">
+              <app-delete-btn></app-delete-btn>
+            </a>
+          </div>
         </td>
       </tr>
     </tbody>
