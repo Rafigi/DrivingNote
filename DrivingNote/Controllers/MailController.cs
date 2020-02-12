@@ -1,58 +1,51 @@
 ﻿namespace DrivingNote.Controllers
 {
+    using DrivingNote.Factory;
     using DrivingNote.Models;
-    using DrivingNote.Utility;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using SelectPdf;
-    using System.Collections.Generic;
 
     [Route("api/[controller]")]
     [ApiController]
     public class MailController : ControllerBase
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ITemplateGeneratorFactory _templateGeneratorFactory;
 
-        public MailController(IHostingEnvironment hostingEnvironment)
+        public MailController(ITemplateGeneratorFactory templateGeneratorFactory)
         {
-            _hostingEnvironment = hostingEnvironment;
+            _templateGeneratorFactory = templateGeneratorFactory;
         }
 
         [HttpPost("SendMail")]
-        public IActionResult SendMail([FromBody] UserInfo userInfo)
+        public IActionResult SendMail([FromBody] UserInformation userInformation)
         {
-            // instantiate a html to pdf converter object
-            HtmlToPdf converter = new HtmlToPdf();
+            HtmlToPdf options = OptionsForPDF();
+            var HTML = _templateGeneratorFactory.GetHTMLString(userInformation);
 
-            // set converter options
-            converter.Options.PdfPageSize = PdfPageSize.A4;
-            converter.Options.PdfPageOrientation = PdfPageOrientation.Portrait;
-            converter.Options.MarginLeft = 10;
-            converter.Options.MarginRight = 10;
-            converter.Options.MarginTop = 20;
-            converter.Options.MarginBottom = 20;
+            if (string.IsNullOrEmpty(HTML))
+            {
+                return NotFound();
+            }
 
-            var HTMLTabel = TemplateGenerator.GetHTMLString(FillInInfo(), _hostingEnvironment);
-
-            // create a new pdf document converting an url
-            PdfDocument doc = converter.ConvertHtmlString(HTMLTabel);
+            PdfDocument doc = options.ConvertHtmlString(HTML);
 
             return File(doc.Save(), "application/pdf");
         }
 
-        private UserInfo FillInInfo()
-        {
-            List<HTMLTable> hTMLTable = new List<HTMLTable>();
 
-            return new UserInfo()
-            {
-                Name = "Mads",
-                LastName = "Illemann",
-                AccountNumber = "1234567890",
-                Email = "Mads@Illemann.dk",
-                Sport = "Gymnastik",
-                HTMLTable = hTMLTable
-            };
+        private HtmlToPdf OptionsForPDF()
+        {
+            HtmlToPdf htmlToPdf = new HtmlToPdf();
+
+            // set converter options
+            htmlToPdf.Options.PdfPageSize = PdfPageSize.A4;
+            htmlToPdf.Options.PdfPageOrientation = PdfPageOrientation.Portrait;
+            htmlToPdf.Options.MarginLeft = 10;
+            htmlToPdf.Options.MarginRight = 10;
+            htmlToPdf.Options.MarginTop = 20;
+            htmlToPdf.Options.MarginBottom = 20;
+
+            return htmlToPdf;
         }
     }
 }
