@@ -3,6 +3,6 @@ export class Cell {
   Date: Date;
   StartAddress: string;
   EndAddress: string;
-  RoundTrip: boolean;
+  RoundTrip: string;
   Distance: string;
 }
