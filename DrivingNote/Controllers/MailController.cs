@@ -16,6 +16,16 @@
             _templateGeneratorFactory = templateGeneratorFactory;
         }
 
+        //[HttpPost("SendMail")]
+        //public IActionResult SendMail([FromBody] UserInformation userInformation)
+        //{
+        //    HtmlToPdf options = OptionsForPDF();
+
+        //    PdfDocument doc = options.ConvertHtmlString("<h1>HELLO WORLD</h1>");
+
+        //    return File(doc.Save(), "application/pdf");
+        //}
+
         [HttpPost("SendMail")]
         public IActionResult SendMail([FromBody] UserInformation userInformation)
         {
@@ -31,6 +41,7 @@
 
             return File(doc.Save(), "application/pdf");
         }
+
 
 
         private HtmlToPdf OptionsForPDF()

@@ -14,6 +14,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 /** Home component*/
 export class HomeComponent implements OnInit {
 
+
+  sendingEmail: boolean = false;
+
   /** Home ctor */
   constructor(private apiService: ApiService) {
 
@@ -38,7 +41,7 @@ export class HomeComponent implements OnInit {
   });
 
   SendNote() {
-    if (!this.informationForm.invalid) {
+    if (this.informationForm.invalid) {
       var userInformation = new UserInformation(
         this.getName.value,
         this.getLastname.value,
@@ -47,14 +50,13 @@ export class HomeComponent implements OnInit {
         this.getAccountNumber.value,
         this.table.Cells
       );
+
+      this.sendingEmail = true;
       this.apiService.SendMail(userInformation).subscribe(response => {
         let blob: any = new Blob([response], { type: 'application/pdf' });
 
         var fileURL = URL.createObjectURL(blob);
         window.open(fileURL);
-
-        this.modal.CloseModal();
-
       }, (err: HttpErrorResponse) => {
         if (err.status == 415 || err.status == 404) {
           console.log("There is something wrong with the information ýour sending?!");
@@ -63,6 +65,9 @@ export class HomeComponent implements OnInit {
         if (err.status == 500) {
           console.log("There is no server to help you!");
         }
+      }, () => {
+        this.sendingEmail = false;
+          this.modal.CloseModal();
       });
     }
 

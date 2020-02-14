@@ -14,9 +14,8 @@ import { SetupComponent } from './setup/setup.component';
 import { SwitchComponent } from '../app/CustomComponents/switch/switch.component';
 import { ToggleComponent } from '../app/CustomComponents/toggle/toggle.component';
 import { ModalComponent } from '../app/CustomComponents/modal/modal.component';
-import { SpinnerBookShelfComponent } from '../app/CustomComponents/spinner-book-shelf/spinner-book-shelf.component';
+import { SpinnerCircleComponent } from '../app/CustomComponents/spinner-circle/spinner-circle.component';
 
-import { ApiService } from '../Services/api.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { ApiService } from '../Services/api.service';
     SwitchComponent,
     ToggleComponent,
     ModalComponent,
-    SpinnerBookShelfComponent
+    SpinnerCircleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
