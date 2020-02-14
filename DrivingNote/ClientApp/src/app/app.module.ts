@@ -14,6 +14,7 @@ import { SetupComponent } from './setup/setup.component';
 import { SwitchComponent } from '../app/CustomComponents/switch/switch.component';
 import { ToggleComponent } from '../app/CustomComponents/toggle/toggle.component';
 import { ModalComponent } from '../app/CustomComponents/modal/modal.component';
+import { SpinnerBookShelfComponent } from '../app/CustomComponents/spinner-book-shelf/spinner-book-shelf.component';
 
 import { ApiService } from '../Services/api.service';
 
@@ -26,7 +27,8 @@ import { ApiService } from '../Services/api.service';
     SetupComponent,
     SwitchComponent,
     ToggleComponent,
-    ModalComponent
+    ModalComponent,
+    SpinnerBookShelfComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
