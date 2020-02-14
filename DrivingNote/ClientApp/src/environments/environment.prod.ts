@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  appUrl: 'https://localhost:44336'
+  appUrl: 'http://www.test.illemads.dk/'
 };

@@ -42,6 +42,19 @@ export class TabelComponent implements OnInit {
     this.cellForm.get("distance").disable();
   }
 
+
+  //FakeInput() {
+  //  let newCell: Cell = {
+  //    id: 1,
+  //    Date: "2020-02-15",
+  //    StartAddress: "Lavlandsvej 21, 4400 Kalundborg, Danmark",
+  //    EndAddress: "Valløesgade 2, 7100 Vejle, Danmark",
+  //    RoundTrip: "Ja",
+  //    Distance: "186 km"
+  //  }
+  //  this.Cells.push(newCell);
+  //}
+
   /** Table ctor */
   constructor() {
 
@@ -144,7 +157,7 @@ export class TabelComponent implements OnInit {
         Date: this.cellForm.get("date").value,
         StartAddress: this.startAddressResult[0],
         EndAddress: this.endAddressResult[0],
-        RoundTrip: this._roundTrip ? "Ja": "Nej",
+        RoundTrip: this._roundTrip ? "Ja" : "Nej",
         Distance: this.distanceResult
       }
 
@@ -156,7 +169,9 @@ export class TabelComponent implements OnInit {
       this.id++;
       this.clearForms();
     }
-    this.IsAdressesFilled();
+    else {
+      this.IsAdressesFilled();
+    }
   }
 
   private IsAdressesFilled(): void {

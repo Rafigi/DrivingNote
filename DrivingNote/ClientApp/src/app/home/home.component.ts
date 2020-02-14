@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   });
 
   SendNote() {
-    if (this.informationForm.invalid) {
+    if (!this.informationForm.invalid) {
       var userInformation = new UserInformation(
         this.getName.value,
         this.getLastname.value,
@@ -66,8 +66,9 @@ export class HomeComponent implements OnInit {
           console.log("There is no server to help you!");
         }
       }, () => {
+        this.table.Cells = [];
         this.sendingEmail = false;
-          this.modal.CloseModal();
+        this.modal.CloseModal();
       });
     }
 
