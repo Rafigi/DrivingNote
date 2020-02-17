@@ -2,9 +2,11 @@
 {
     using DrivingNote.Factory;
     using DrivingNote.Models;
+    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using SelectPdf;
 
+    [EnableCors("CORS")]
     [Route("api/[controller]")]
     [ApiController]
     public class MailController : ControllerBase

@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 export class SpinnerCircleComponent {
 
   @Input() text: string = "Loading";
-  @Input() show: boolean = true;
+  @Input() show: boolean = false;
   @Input() circleColor: string;
     /** spinnerCircle ctor */
     constructor() {
