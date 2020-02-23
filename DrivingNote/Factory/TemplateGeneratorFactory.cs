@@ -2,7 +2,6 @@
 {
     using DrivingNote.Models;
     using Microsoft.AspNetCore.Hosting;
-    using System;
     using System.Collections.Generic;
     using System.Text;
     public class TemplateGeneratorFactory : ITemplateGeneratorFactory
@@ -19,7 +18,7 @@
                 return string.Empty;
             }
 
-            return CreateHTMLTableString(userInformation.TableInfomation);
+            return CreateHTMLTableString(userInformation);
         }
 
         private bool IsTableInformationValid(List<TableInfomation> tableInfomations)
@@ -57,7 +56,7 @@
             return false;
         }
 
-        private string CreateHTMLTableString(List<TableInfomation> tableInfomation)
+        private string CreateHTMLTableString(UserInformation userInformation)
         {
             //Getting the Style for the HTML in the wwwroot folder.
             string webRootPath = _hostingEnvironment.WebRootPath + @"/CSS/table.css";
@@ -66,6 +65,60 @@
             builder.Append("<link rel=\"stylesheet\" type=\"text/css\"  href=\" " + webRootPath + "\"/>");
             builder.Append("</head>");
             builder.Append("<body>");
+
+            builder.Append(CreateUserInformationTable(userInformation));
+            builder.Append("<div>");
+            builder.Append("</div>");
+            builder.Append(CreateDriveNoteTable(userInformation.TableInfomation));
+            builder.Append(@"</body>");
+            builder.Append(@"</html>");
+
+            return builder.ToString();
+        }
+
+        private string CreateUserInformationTable(UserInformation userInformation)
+        {
+            var builder = new StringBuilder();
+
+            builder.Append("<table id=\"customers\">");
+            builder.Append("<thead>");
+            builder.Append("<tr>");
+            builder.Append("<th>Navn</th>");
+            builder.Append("<th>Mail</th>");
+            builder.Append("<th>Sport</th>");
+            builder.Append("<th>Konto Nr</th>");
+            builder.Append("</tr>");
+            builder.Append("</thead>");
+
+            builder.Append("<tbody>");
+
+            builder.Append("<tr>");
+            builder.Append("<td>");
+            builder.Append(userInformation.Name);
+            builder.Append(userInformation.LastName);
+            builder.Append("</td>");
+            builder.Append("<td>");
+            builder.Append(userInformation.Email);
+            builder.Append("</td>");
+            builder.Append("<td>");
+            builder.Append(userInformation.Sport);
+            builder.Append("</td>");
+            builder.Append("<td>");
+            builder.Append(userInformation.AccountNumber);
+            builder.Append("</td>");
+            builder.Append("</tr>");
+
+            builder.Append("</tbody>");
+
+            builder.Append("</table>");
+
+            return builder.ToString();
+        }
+
+
+        private string CreateDriveNoteTable(List<TableInfomation> tableInfomation)
+        {
+            var builder = new StringBuilder();
 
             builder.Append("<table id=\"customers\">");
             builder.Append("<thead>");
@@ -104,8 +157,6 @@
             builder.Append("</tbody>");
 
             builder.Append("</table>");
-            builder.Append(@"</body>");
-            builder.Append(@"</html>");
 
             return builder.ToString();
         }
