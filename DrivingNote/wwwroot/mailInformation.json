@@ -1,0 +1,4 @@
+{
+  "ToMail": "niels@illemann.dk", //Which mail should it be sent to?
+  "NameOfAttachedFile": "Note.pdf" //What should the name of the file be? - Remember to use the .pdf at the end of the file.
+}
