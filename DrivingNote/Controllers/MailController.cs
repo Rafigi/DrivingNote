@@ -12,21 +12,13 @@
     public class MailController : ControllerBase
     {
         private readonly ITemplateGeneratorFactory _templateGeneratorFactory;
+        private readonly IMailFactory _mailFactory;
 
-        public MailController(ITemplateGeneratorFactory templateGeneratorFactory)
+        public MailController(ITemplateGeneratorFactory templateGeneratorFactory, IMailFactory mailFactory)
         {
             _templateGeneratorFactory = templateGeneratorFactory;
+            _mailFactory = mailFactory;
         }
-
-        //[HttpPost("SendMail")]
-        //public IActionResult SendMail([FromBody] UserInformation userInformation)
-        //{
-        //    HtmlToPdf options = OptionsForPDF();
-
-        //    PdfDocument doc = options.ConvertHtmlString("<h1>HELLO WORLD</h1>");
-
-        //    return File(doc.Save(), "application/pdf");
-        //}
 
         [HttpPost("SendMail")]
         public IActionResult SendMail([FromBody] UserInformation userInformation)
@@ -38,6 +30,10 @@
             {
                 return NotFound();
             }
+
+
+            PdfDocument pdfToSend = options.ConvertHtmlString(HTML);
+            _mailFactory.Send(pdfToSend, userInformation.Email, $"{userInformation.Name} {userInformation.LastName}");
 
             PdfDocument doc = options.ConvertHtmlString(HTML);
 
