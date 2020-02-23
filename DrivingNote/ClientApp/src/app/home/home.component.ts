@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   informationForm = new FormGroup({
     name: new FormControl(null, Validators.required),
     lastname: new FormControl(null, Validators.required),
-    mail: new FormControl(null, Validators.required),
+    mail: new FormControl(null, [ Validators.required, Validators.email ]),
     sport: new FormControl('', Validators.required),
     accountNumber: new FormControl(null, Validators.required),
   });
@@ -59,8 +59,7 @@ export class HomeComponent implements OnInit {
         window.open(fileURL);
       }, (err: HttpErrorResponse) => {
         if (err.status == 415 || err.status == 404) {
-          console.log("There is something wrong with the information ýour sending?!");
-          console.log(userInformation);
+          console.log("There is something wrong with the information your sending?!");
         }
         if (err.status == 500) {
           console.log("There is no server to help you!");

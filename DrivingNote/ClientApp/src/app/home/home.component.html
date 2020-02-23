@@ -2,7 +2,8 @@
   <h1 class="text-center">Blanket for at oprette kørselsseddel.</h1>
   <div class="col-md-12 d-flex justify-content-between">
     <button type="submit" class="col-md-3 _cylinderbutton _cylinderbutton-left" (click)="table.addCell()">Tilføj Ny Række</button>
-    <button *ngIf="table.getCellCount() > 0" class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>
+    <!--<button *ngIf="table.getCellCount() > 0" class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>-->
+    <button class="col-md-3 _cylinderbutton _cylinderbutton-right" (click)="modal.OpenModal()">Send Kørselsseddel</button>
   </div>
 
   <app-tabel #table></app-tabel>
@@ -12,7 +13,7 @@
 <app-modal #modal>
   <!--When the PDF is being created and the email have been sent.-->
   <div>
-    <app-spinner-circle [text]="'Sender tabellen videre'" [show]="sendingEmail"></app-spinner-circle>
+    <app-spinner-circle [text]="'Opretter og sender PDF'" [show]="sendingEmail"></app-spinner-circle>
   </div>
 
   <div *ngIf="!sendingEmail">
@@ -22,7 +23,7 @@
           <input placeholder="Navn" type="text" formControlName="name" />
           <div *ngIf="getName.invalid && (getName.dirty || getName.touched)"
                class="alert alert-danger">
-            <div *ngIf="getName.errors.required">
+            <div *ngIf="getName.errors.required && getName.submitted">
               Navn skal udfyldelse.
             </div>
           </div>
@@ -44,6 +45,9 @@
                class="alert alert-danger">
             <div *ngIf="getMail.errors.required">
               Mail skal udfyldelse.
+            </div>
+            <div *ngIf="getMail.errors.email">
+              Mail ikke korrekt udfyldt.
             </div>
           </div>
 
@@ -78,12 +82,12 @@
 
       </div>
 
+      <!--The buttons for the modal-->
+      <div>
+        <button type="submit" [disabled]="!informationForm.valid" (click)="SendNote()" class="_cylinderbutton _cylinderbutton-left">Send til min forening</button>
+        <button (click)="modal.CloseModal()" class="_cylinderbutton _cylinderbutton-right">Hov! Jeg glemte nogle kørsler</button>
+      </div>
     </form>
 
-    <!--The buttons for the modal-->
-    <div>
-      <button (click)="SendNote()" class="_cylinderbutton _cylinderbutton-left">Send til min forening</button>
-      <button (click)="modal.CloseModal()" class="_cylinderbutton _cylinderbutton-right">Hov! Jeg glemte nogle kørsler</button>
-    </div>
   </div>
 </app-modal>

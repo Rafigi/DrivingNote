@@ -17,14 +17,15 @@
     background: rgba(14, 6, 255, 0.2);
   }
 
-  &-left:hover {
+  &-left:hover:enabled {
     background-color: rgba(64, 255, 6, 0.5);
   }
 
-  &-right:hover {
+  &-right:hover:enabled {
     background-color: rgba(14, 6, 255, 0.5);
   }
 }
+
 
 
 .input-field {
