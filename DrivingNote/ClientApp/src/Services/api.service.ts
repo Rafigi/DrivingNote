@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import UserInformation from '../Models/UserInformation';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class ApiService {
 
   private myAppUrl: string;
+  private AppUrlHost: string = window.location.origin;
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.appUrl;
@@ -20,8 +20,12 @@ export class ApiService {
     'responseType': 'arraybuffer' as 'json'
   };
 
-
   SendMail(userInformation: UserInformation): Observable<Blob> {
-    return this.http.post<any>(`${this.myAppUrl}/api/mail/sendmail`, userInformation, this.httpOptions);
+    return this.http.post<any>(`${this.AppUrlHost}/api/mail/sendmail`, userInformation, this.httpOptions);
   }
+
+
+  //SendMail(userInformation: UserInformation): Observable<Blob> {
+  //  return this.http.post<any>(`${this.myAppUrl}/api/mail/sendmail`, userInformation, this.httpOptions);
+  //}
 }
